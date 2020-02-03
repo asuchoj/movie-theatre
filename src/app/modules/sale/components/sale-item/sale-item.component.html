@@ -1,0 +1,13 @@
+<div class="sale-item">
+  <div>
+    <span [textContent]="saleItem.name"></span>
+
+    <span [textContent]="saleItem.price | currency"></span>
+  </div>
+
+  <button (click)="addaToTheRightShopCar.emit(saleItem.id)">
+    <i class="material-icons">add</i>
+  </button>
+</div>
+
+

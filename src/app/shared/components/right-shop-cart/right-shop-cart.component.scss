@@ -1,0 +1,12 @@
+@import './src/assets/styles/colors';
+
+.right-shop-cart-box {
+  display: flex;
+  flex-direction: column;
+  background-color: #457B9D;
+}
+
+.total-count {
+  display: flex;
+  align-items: center;
+}
