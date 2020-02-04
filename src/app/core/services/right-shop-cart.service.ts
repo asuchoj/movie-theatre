@@ -10,20 +10,20 @@ export class RightShopCartService {
   private totalPrice = new BehaviorSubject(0);
   private rightShopCartArray = new BehaviorSubject([]);
 
-  constructor() {}
-
   addItem(item: SaleInterface): void {
-    if (this.rightShopCart[item.id]) {
-      this.rightShopCart[item.id].count++;
+    const product = {...item};
 
-      if (this.rightShopCart[item.id].id === 2 && this.rightShopCart[item.id].count === 5) {
-        this.rightShopCart[item.id].totalPrice = 3 * this.rightShopCart[item.id].price;
+    if (this.rightShopCart[product.id]) {
+      this.rightShopCart[product.id].count++;
+
+      if (this.rightShopCart[product.id].id === 2 && this.rightShopCart[product.id].count === 5) {
+        this.rightShopCart[product.id].totalPrice = 3 * this.rightShopCart[product.id].price;
       } else {
-        this.rightShopCart[item.id].totalPrice = this.rightShopCart[item.id].count * this.rightShopCart[item.id].price;
+        this.rightShopCart[product.id].totalPrice = this.rightShopCart[product.id].count * this.rightShopCart[product.id].price;
       }
     } else {
-      this.rightShopCart[item.id] = item;
-      this.rightShopCart[item.id].totalPrice = item.price;
+      this.rightShopCart[product.id] = product;
+      this.rightShopCart[product.id].totalPrice = product.price;
     }
 
     this.countTotalPrice();
@@ -31,16 +31,18 @@ export class RightShopCartService {
   }
 
   removeItem(item: SaleInterface): void {
-    if (this.rightShopCart[item.id] && this.rightShopCart[item.id].count > 1) {
-      this.rightShopCart[item.id].count--;
+    const product = {...item};
 
-      if (this.rightShopCart[item.id].id === 2 && this.rightShopCart[item.id].count === 5) {
-        this.rightShopCart[item.id].totalPrice = 3 * this.rightShopCart[item.id].price;
+    if (this.rightShopCart[product.id] && this.rightShopCart[product.id].count > 1) {
+      this.rightShopCart[product.id].count--;
+
+      if (this.rightShopCart[product.id].id === 2 && this.rightShopCart[product.id].count === 5) {
+        this.rightShopCart[product.id].totalPrice = 3 * this.rightShopCart[product.id].price;
       } else {
-        this.rightShopCart[item.id].totalPrice = this.rightShopCart[item.id].count * this.rightShopCart[item.id].price;
+        this.rightShopCart[product.id].totalPrice = this.rightShopCart[product.id].count * this.rightShopCart[product.id].price;
       }
     } else {
-      delete this.rightShopCart[item.id];
+      delete this.rightShopCart[product.id];
     }
 
     this.countTotalPrice();
@@ -73,11 +75,14 @@ export class RightShopCartService {
     this.totalPrice.next(result);
   }
 
-  buyItems() {
+  buyItems(): void {
     this.rightShopCartArray.next([]);
     this.rightShopCart = {};
-
     this.countTotalPrice();
     this.getItems();
+  }
+
+  clear(): void {
+    this.buyItems();
   }
 }

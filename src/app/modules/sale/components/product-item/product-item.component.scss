@@ -1,0 +1,35 @@
+@import './src/assets/styles/colors';
+
+.product-item-wrap {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid $dark;
+  flex-grow: 1;
+  width: 210px;
+
+  button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background: $primary;
+    color: $dark;
+    border-radius: 20px;
+  }
+
+  .product-item-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      margin: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .product-item-price {
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.products-wrap{
+  display: flex;
+  margin: 10px;
+
+  .cart-products-box {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    align-content: baseline;
+  }
+}

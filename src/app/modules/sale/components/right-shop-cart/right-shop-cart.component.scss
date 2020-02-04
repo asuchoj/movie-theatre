@@ -1,0 +1,82 @@
+@import '../../../../../assets/styles/colors';
+
+.cart-box {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: $primary;
+  color: $dark;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 5px solid $warning;
+
+  &-text {
+    margin: 10px;
+    font-size: 20px;
+  }
+
+  &-icon {
+    font-size: 36px;
+  }
+
+  .clear-btn {
+    margin: 10px;
+  }
+}
+
+.cart-products-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $warning;
+  margin: 10px;
+
+  .products-count-box {
+    margin: 0 10px;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+
+    button {
+      margin: 5px;
+      background: white;
+      padding: 4px 8px;
+      border-radius: 25px;
+      font-size: 16px;
+    }
+
+    i:hover {
+      cursor: pointer;
+    }
+
+    span {
+      width: 30px;
+      text-align: center;
+    }
+  }
+}
+
+.total-count-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .total-count-price {
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
+
+.buy-products-btn {
+  font-size: 20px;
+  margin: 10px;
+  background-color: $warning;
+  color: $dark;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 20px;
+}

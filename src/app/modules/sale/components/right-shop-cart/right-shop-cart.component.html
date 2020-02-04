@@ -1,0 +1,26 @@
+<div class="cart-box">
+  <div class="cart-header">
+    <span class="cart-header-text">Shopping Cart</span>
+
+    <i class="material-icons cart-header-icon">shopping_cart</i>
+
+    <button class="clear-btn" (click)="clear()">Clear</button>
+  </div>
+
+  <div class="cart-products-box" *ngFor="let item of merchandises">
+    <span [textContent]="item.name"></span>
+
+    <div class="products-count-box">
+      <i (click)="addItem(item)" class="material-icons">add_circle_outline</i>
+      <span [textContent]="item.count"></span>
+      <i (click)="removeItem(item)" class="material-icons">remove_circle_outline</i>
+    </div>
+  </div>
+
+  <div class="total-count-box">
+    <span class="total-count-text" [textContent]="'total count:'"></span>
+    <span class="total-count-price" [textContent]="totalPrice | currency"></span>
+  </div>
+
+  <button class="buy-products-btn" (click)="buyProducts()">Buy</button>
+</div>

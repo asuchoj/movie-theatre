@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SaleComponent } from './pages/sale/sale.component';
-import { SaleItemComponent } from './components/sale-item/sale-item.component';
-import {SharedModule} from '../../shared/shared.module';
+import { ProductsComponent } from './pages/products/products.component';
+import { ProductItemComponent } from './components/product-item/product-item.component';
+import {RightShopCartComponent} from './components/right-shop-cart/right-shop-cart.component';
 
 @NgModule({
   declarations: [
-    SaleComponent,
-    SaleItemComponent
+    ProductsComponent,
+    ProductItemComponent,
+    RightShopCartComponent
   ],
   exports: [
-    SaleComponent,
-    SaleItemComponent
+    ProductsComponent,
+    ProductItemComponent,
+    RightShopCartComponent
   ],
   imports: [
-    CommonModule,
-    SharedModule
+    CommonModule
   ]
 })
-export class SaleModule { }
+export class SaleModule {}

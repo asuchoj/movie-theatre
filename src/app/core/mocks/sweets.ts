@@ -18,5 +18,11 @@ export const Sweets: SaleInterface[] = [
     name: 'Soda',
     price: 2,
     count: 1
-  }
+  },
+  {
+    id: 4,
+    name: 'Popcorn',
+    price: 3,
+    count: 1
+  },
 ];

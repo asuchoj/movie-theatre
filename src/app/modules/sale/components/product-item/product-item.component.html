@@ -1,0 +1,14 @@
+<div class="product-item-wrap">
+  <div class="product-item-box">
+    <span>
+      <i class="material-icons">local_movies</i>
+      <span [textContent]="saleItem.name"></span>
+    </span>
+
+    <span class="product-item-price" [textContent]="saleItem.price | currency"></span>
+  </div>
+
+  <button (click)="addaToTheRightShopCar.emit(saleItem.id)">Add to cart</button>
+</div>
+
+
