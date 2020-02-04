@@ -1,11 +1,11 @@
 <div class="products-wrap">
   <div class="cart-products-box">
-    <ng-container *ngFor="let item of sweets">
-      <app-product-item [saleItem]="item" (addaToTheRightShopCar)="addaToTheRightShopCar($event)"></app-product-item>
+    <ng-container *ngFor="let item of products">
+      <app-product-item [saleItem]="item" (adaToShopCar)="addToShopCar($event)"></app-product-item>
     </ng-container>
   </div>
 
-  <app-right-shop-cart></app-right-shop-cart>
+  <app-shop-cart></app-shop-cart>
 </div>
 
 

@@ -1,6 +1,6 @@
-import {SaleInterface} from '../interfaces/sale.interface';
+import {ProductItem} from '../interfaces/productItem';
 
-export const Sweets: SaleInterface[] = [
+export const Products: ProductItem[] = [
   {
     id: 1,
     name: 'Popcorn',

@@ -1,9 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {SaleService} from '../../services/sale.service';
-import {SaleInterface} from '../../../../core/interfaces/sale.interface';
-import {RightShopCartService} from '../../../../core/services/right-shop-cart.service';
+
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+
+import {ProductsService} from '../../services/products.service';
+import {ProductItem} from '../../../../core/interfaces/productItem';
+import {ShopCartService} from '../../../../core/services/shop-cart.service';
 
 @Component({
   selector: 'app-products',
@@ -11,18 +13,18 @@ import {takeUntil} from 'rxjs/operators';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-  sweets: SaleInterface[];
+  products: ProductItem[];
   private unsubscribe$ = new Subject();
 
   constructor(
-    public sale: SaleService,
-    public rightShopCartService: RightShopCartService
+    public productsService: ProductsService,
+    public shopCartService: ShopCartService
   ) {}
 
   ngOnInit() {
-    this.sale.getSweets().pipe(
+    this.productsService.getProducts().pipe(
       takeUntil(this.unsubscribe$)
-    ).subscribe(sweets => this.sweets = sweets);
+    ).subscribe(products => this.products = products);
   }
 
   ngOnDestroy() {
@@ -30,7 +32,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  addaToTheRightShopCar(id: number): void {
-    this.rightShopCartService.addItem(this.sweets.find(item => item.id === id));
+  addToShopCar(id: number): void {
+    this.shopCartService.addItem(this.products.find(item => item.id === id));
   }
 }
