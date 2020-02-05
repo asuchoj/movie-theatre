@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 
 import {ProductItem} from '../interfaces/productItem';
+import {DiscountProductIdEnum} from '../enums/discount-product-id.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,7 @@ export class ShopCartService {
       this.shopCart[product.id].totalPrice = product.price;
     }
 
-    this.countTotalPrice();
-    this.getItems();
+    this.recountData();
   }
 
   removeItem(item: ProductItem): void {
@@ -37,8 +37,7 @@ export class ShopCartService {
       delete this.shopCart[product.id];
     }
 
-    this.countTotalPrice();
-    this.getItems();
+    this.recountData();
   }
 
   getItems(): BehaviorSubject<ProductItem[]> {
@@ -56,7 +55,7 @@ export class ShopCartService {
     return this.totalPrice;
   }
 
-  countTotalPrice(): void {
+  private countTotalPrice(): void {
     let result = 0;
     const keys = Object.keys(this.shopCart);
 
@@ -70,6 +69,10 @@ export class ShopCartService {
   buyItems(): void {
     this.shopCartArray.next([]);
     this.shopCart = {};
+    this.recountData();
+  }
+
+  recountData(): void {
     this.countTotalPrice();
     this.getItems();
   }
@@ -78,9 +81,9 @@ export class ShopCartService {
     this.buyItems();
   }
 
-  countProductPriceItem(item: ProductItem) {
-    if (item.id === 2 && item.count === 5) {
-      return item.price * 3;
+  private countProductPriceItem(item: ProductItem): number {
+    if (item.id === DiscountProductIdEnum.Snickers && item.count % 5 === 0) {
+      return item.price * 3 * (item.count / 5);
     } else {
       return item.price * item.count;
     }

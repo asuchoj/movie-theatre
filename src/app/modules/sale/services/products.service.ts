@@ -7,7 +7,7 @@ import {Observable, of} from 'rxjs';
   providedIn: 'root'
 })
 export class ProductsService {
-  products: ProductItem[] = Products;
+  private products: ProductItem[] = Products;
 
   getProducts(): Observable<ProductItem[]> {
     return of(this.products);
