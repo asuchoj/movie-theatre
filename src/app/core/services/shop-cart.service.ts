@@ -17,12 +17,7 @@ export class ShopCartService {
 
     if (this.shopCart[product.id]) {
       this.shopCart[product.id].count++;
-
-      if (this.shopCart[product.id].id === 2 && this.shopCart[product.id].count === 5) {
-        this.shopCart[product.id].totalPrice = 3 * this.shopCart[product.id].price;
-      } else {
-        this.shopCart[product.id].totalPrice = this.shopCart[product.id].count * this.shopCart[product.id].price;
-      }
+      this.shopCart[product.id].totalPrice = this.countProductPriceItem(this.shopCart[product.id]);
     } else {
       this.shopCart[product.id] = product;
       this.shopCart[product.id].totalPrice = product.price;
@@ -37,12 +32,7 @@ export class ShopCartService {
 
     if (this.shopCart[product.id] && this.shopCart[product.id].count > 1) {
       this.shopCart[product.id].count--;
-
-      if (this.shopCart[product.id].id === 2 && this.shopCart[product.id].count === 5) {
-        this.shopCart[product.id].totalPrice = 3 * this.shopCart[product.id].price;
-      } else {
-        this.shopCart[product.id].totalPrice = this.shopCart[product.id].count * this.shopCart[product.id].price;
-      }
+      this.shopCart[product.id].totalPrice = this.countProductPriceItem(this.shopCart[product.id]);
     } else {
       delete this.shopCart[product.id];
     }
@@ -86,5 +76,13 @@ export class ShopCartService {
 
   clear(): void {
     this.buyItems();
+  }
+
+  countProductPriceItem(item: ProductItem) {
+    if (item.id === 2 && item.count === 5) {
+      return item.price * 3;
+    } else {
+      return item.price * item.count;
+    }
   }
 }
