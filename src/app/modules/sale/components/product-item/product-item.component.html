@@ -8,5 +8,5 @@
     <span class="product-item-price" [textContent]="saleItem.price | currency"></span>
   </div>
 
-  <button (click)="adaToShopCar.emit(saleItem.id)">Add to cart</button>
+  <button class="add-to-cart-btn" (click)="adaToShopCar.emit(saleItem.id)">Add to cart</button>
 </div>

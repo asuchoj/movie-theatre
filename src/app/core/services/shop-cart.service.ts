@@ -40,7 +40,7 @@ export class ShopCartService {
     this.recountData();
   }
 
-  getItems(): BehaviorSubject<ProductItem[]> {
+  getItems(): BehaviorSubject<any[]> {
     const result = [];
     const keys = Object.keys(this.shopCart);
     keys.forEach(item => {
@@ -55,6 +55,16 @@ export class ShopCartService {
     return this.totalPrice;
   }
 
+  buyItems(): void {
+    this.shopCartArray.next([]);
+    this.shopCart = {};
+    this.recountData();
+  }
+
+  clear(): void {
+    this.buyItems();
+  }
+
   private countTotalPrice(): void {
     let result = 0;
     const keys = Object.keys(this.shopCart);
@@ -66,19 +76,9 @@ export class ShopCartService {
     this.totalPrice.next(result);
   }
 
-  buyItems(): void {
-    this.shopCartArray.next([]);
-    this.shopCart = {};
-    this.recountData();
-  }
-
-  recountData(): void {
+  private recountData(): void {
     this.countTotalPrice();
     this.getItems();
-  }
-
-  clear(): void {
-    this.buyItems();
   }
 
   private countProductPriceItem(item: ProductItem): number {
