@@ -9,19 +9,21 @@ import {DiscountProductIdEnum} from '../enums/discount-product-id.enum';
   providedIn: 'root'
 })
 export class ShopCartService {
-  private shopCart: any = {};
+  private shopCart = new Map();
   private totalPrice = new BehaviorSubject(0);
   private shopCartArray = new BehaviorSubject([]);
 
   addItem(item: ProductItem): void {
     const product = {...item};
 
-    if (this.shopCart[product.id]) {
-      this.shopCart[product.id].count++;
-      this.shopCart[product.id].totalPrice = this.countProductPriceItem(this.shopCart[product.id]);
+    if (this.shopCart.has(product.id)) {
+      const productItem = this.shopCart.get(product.id);
+
+      productItem.count++;
+      productItem.totalPrice = this.countProductPriceItem(productItem);
     } else {
-      this.shopCart[product.id] = product;
-      this.shopCart[product.id].totalPrice = product.price;
+      this.shopCart.set(product.id, product);
+      this.shopCart.get(product.id).totalPrice = product.price;
     }
 
     this.recountData();
@@ -30,11 +32,13 @@ export class ShopCartService {
   removeItem(item: ProductItem): void {
     const product = {...item};
 
-    if (this.shopCart[product.id] && this.shopCart[product.id].count > 1) {
-      this.shopCart[product.id].count--;
-      this.shopCart[product.id].totalPrice = this.countProductPriceItem(this.shopCart[product.id]);
+    if (this.shopCart.has(product.id) && this.shopCart.get(product.id).count > 1) {
+      const productItem = this.shopCart.get(product.id);
+
+      productItem.count--;
+      productItem.totalPrice = this.countProductPriceItem(productItem);
     } else {
-      delete this.shopCart[product.id];
+      this.shopCart.delete(product.id);
     }
 
     this.recountData();
@@ -42,9 +46,9 @@ export class ShopCartService {
 
   getItems(): BehaviorSubject<any[]> {
     const result = [];
-    const keys = Object.keys(this.shopCart);
-    keys.forEach(item => {
-      result.push(this.shopCart[item]);
+
+    this.shopCart.forEach(item => {
+      result.push(item);
     });
 
     this.shopCartArray.next(result);
@@ -62,16 +66,15 @@ export class ShopCartService {
 
   clear(): void {
     this.shopCartArray.next([]);
-    this.shopCart = {};
+    this.shopCart.clear();
     this.recountData();
   }
 
   private countTotalPrice(): void {
     let result = 0;
-    const keys = Object.keys(this.shopCart);
 
-    keys.forEach(item => {
-      result += this.shopCart[item].totalPrice;
+    this.shopCart.forEach(item => {
+      result += item.totalPrice;
     });
 
     this.totalPrice.next(result);
