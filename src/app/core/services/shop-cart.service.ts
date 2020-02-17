@@ -56,7 +56,7 @@ export class ShopCartService {
   }
 
   buyItems(): void {
-    //Todo: change when add api
+    // Todo: change when add api
     this.clear();
   }
 
@@ -83,8 +83,12 @@ export class ShopCartService {
   }
 
   private countProductPriceItem(item: ProductItem): number {
-    if (item.id === DiscountProductIdEnum.Snickers && item.count % 5 === 0) {
-      return item.price * 3 * (item.count / 5);
+    if (item.id === DiscountProductIdEnum.Snickers) {
+      if (item.count >= 5) {
+        return (item.price * ( item.count % 5)) + item.price * 3 * ((item.count - item.count % 5) / 5);
+      } else {
+        return item.price * item.count;
+      }
     } else {
       return item.price * item.count;
     }

@@ -64,7 +64,6 @@ describe('ShopCartService', () => {
   it('total price with five discount snickers work', (done) => {
     const TotalPriceWithFiveSnickersTest = 3 * TestPopсornProduct.price + 3 * TestSnickersProduct.price + TestSodaProduct.price;
 
-
     for (let i = 0; i < 3; i++) {
       service.addItem(TestPopсornProduct);
     }
@@ -81,9 +80,27 @@ describe('ShopCartService', () => {
     });
   });
 
+  it('total price count right with discount with eight snickers work', (done) => {
+    const TotalPriceWithFiveSnickersTest = 3 * TestPopсornProduct.price + 6 * TestSnickersProduct.price + TestSodaProduct.price;
+
+    for (let i = 0; i < 3; i++) {
+      service.addItem(TestPopсornProduct);
+    }
+
+    for (let i = 0; i < 8; i++) {
+      service.addItem(TestSnickersProduct);
+    }
+
+    service.addItem(TestSodaProduct);
+
+    service.getTotalPrice().subscribe( (item) => {
+      expect(item).toBe(TotalPriceWithFiveSnickersTest);
+      done();
+    });
+  });
+
   it('total price with ten discount snickers work', (done) => {
     const TotalPriceWithTenSnickersTest = 3 * TestPopсornProduct.price + 6 * TestSnickersProduct.price + TestSodaProduct.price;
-
 
     for (let i = 0; i < 3; i++) {
       service.addItem(TestPopсornProduct);
