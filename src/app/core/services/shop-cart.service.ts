@@ -83,14 +83,13 @@ export class ShopCartService {
   }
 
   private countProductPriceItem(item: ProductItem): number {
-    if (item.id === DiscountProductIdEnum.Snickers) {
-      if (item.count >= 5) {
-        return (item.price * ( item.count % 5)) + item.price * 3 * ((item.count - item.count % 5) / 5);
-      } else {
-        return item.price * item.count;
-      }
-    } else {
-      return item.price * item.count;
+    if (item.id === DiscountProductIdEnum.Snickers && item.count >= 5) {
+      const snickersCountWithoutDiscount = item.count % 5;
+      const discountSnickersGroupCount = (item.count - snickersCountWithoutDiscount) / 5;
+
+      return item.price * (snickersCountWithoutDiscount + 3 * discountSnickersGroupCount);
     }
+
+    return item.price * item.count;
   }
 }
