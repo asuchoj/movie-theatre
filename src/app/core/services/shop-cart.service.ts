@@ -56,13 +56,14 @@ export class ShopCartService {
   }
 
   buyItems(): void {
-    this.shopCartArray.next([]);
-    this.shopCart = {};
-    this.recountData();
+    //Todo: change when add api
+    this.clear();
   }
 
   clear(): void {
-    this.buyItems();
+    this.shopCartArray.next([]);
+    this.shopCart = {};
+    this.recountData();
   }
 
   private countTotalPrice(): void {
