@@ -24,5 +24,11 @@ export const Products: ProductItem[] = [
     name: 'Popcorn',
     price: 3,
     count: 1
+  },
+  {
+    id: 5,
+    name: 'Coca',
+    price: 2,
+    count: 1
   }
 ];
